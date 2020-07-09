@@ -28,7 +28,6 @@ struct graph
             }
         for(int i=1; i<=n-2; i++)
         {
-        cnt++;
             degree[leaf]=0;
             int next=-1;
             for(auto i : adj[leaf])
