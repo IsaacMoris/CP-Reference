@@ -22,12 +22,16 @@ struct graph // assume: |V| <= 64F
         function<int(state,state,state)> rec = [&](state R, state P, state X)
         {
             if(!(P|X))  // R is a bitset of maximal clique
-                return __builtin_popcountll(R);
+            {
+                int cnt=0;
+                for (int i = 0; i < n; ++i, R >>= 1)
+                    if (R & 1)
+                        cnt++;
+                return cnt;
+            }
             int ans=0;
-            state u = P;
+            state u = P|X;
             u=u &(-u);
-            if(!u)
-                u=(X & -X );
             while(P & ~ adj[u])
             {
                 state v= P & -P;
