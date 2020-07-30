@@ -1,9 +1,11 @@
 struct Matrix
 {
-    int n,val;
+    int n;
+    int val;
     vector<vector<int> > a;
     Matrix(int _n, int _val)
     {
+        n=_n, val=_val;
         a.resize(n,vector<int>(n,0));
         for(int i=0; i<n; i++)
             for(int j=0; j<n; j++)
@@ -27,7 +29,7 @@ Matrix power(Matrix a, int p)
         if(p&1)
             res=res*temp;
         temp=temp*temp;
-        p>>1;
+        p>>=1;
     }
     return res;
 }
