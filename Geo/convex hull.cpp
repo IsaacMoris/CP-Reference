@@ -15,7 +15,7 @@ int cross(point a, point b)
 {
     return a.x*b.y-a.y*b.x;
 }
-struct cmp
+struct sortCW
 {
     point center ;
     cmp(point center) : center(center) {}
@@ -30,7 +30,7 @@ struct cmp
 vector<point> hull(vector<point> v)
 {
     sort(v.begin(),v.end());
-    sort(v.begin()+1,v.end(),cmp(v[0]));
+    sort(v.begin()+1,v.end(),sortCW(v[0]));
     v.push_back(v[0]);
     vector<point> ans ;
     for(auto i : v)
