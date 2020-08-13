@@ -1,26 +1,45 @@
-
-#define sz(v)      ((int)((v).size()))
-complex<ll> cntr;
-vector<complex<ll>> ConvexHull(vector<complex<ll>> v)
+struct point
 {
-    if(v.size() <= 1)
-        return v;
-    for(int i=1; i<v.size(); i++)
-        if(v[i].imag()<v[0].imag() ||
-                (v[i].imag()==v[0].imag() && v[i].real()<v[0].real()))
-            swap(v[i],v[0]);
-    cntr = v[0];
-    sort(v.begin()+1, v.end(), sort_cw);
-    vector<complex<ll> > ch;
-    v.push_back(v[0]);
-    for (int i = 0; i < v.size(); i++)
+    int x,  y;
+    point(int x, int y) : x(x), y(y) {}
+    point operator -(point other)
     {
-        while (sz(ch) > 1 &&
-                cp(ch[sz(ch)-2]-ch[sz(ch)-1], v[i]-ch[sz(ch)-1]) >= 0)
-            ch.pop_back();
-
-        ch.push_back(v[i]);
+        return point(x-other.x, y-other.y);
     }
-    ch.pop_back();
-    return ch;
+    bool operator <(const point  &other) const
+    {
+        return x!=other.x ? x<other.x : y<other.y;
+    }
+};
+int cross(point a, point b)
+{
+    return a.x*b.y-a.y*b.x;
+}
+struct cmp
+{
+    point center ;
+    cmp(point center) : center(center) {}
+    bool operator () (point  a,point  b)
+    {
+        int res=cross(a-center, b-center);
+        if(res)
+            return res>0;
+        return a.y!=b.y ? a.y>b.y : a.x < b.x;
+    }
+};
+vector<point> hull(vector<point> v)
+{
+    sort(v.begin(),v.end());
+    sort(v.begin()+1,v.end(),cmp(v[0]));
+    v.push_back(v[0]);
+    vector<point> ans ;
+    for(auto i : v)
+    {
+        int sz=ans.size();
+        while(sz > 1 && cross(i-ans[sz-1], ans[sz-2]-ans[sz-1])<=0)
+            ans.pop_back(), sz--;
+        ans.push_back(i);
+    }
+    ans.pop_back();
+    return ans;
 }
