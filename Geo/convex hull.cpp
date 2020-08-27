@@ -18,7 +18,7 @@ int cross(point a, point b)
 struct sortCW
 {
     point center ;
-    cmp(point center) : center(center) {}
+    sortCW(point center) : center(center) {}
     bool operator () (point  a,point  b)
     {
         int res=cross(a-center, b-center);
