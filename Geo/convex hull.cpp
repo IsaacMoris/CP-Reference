@@ -1,7 +1,7 @@
 struct point
 {
-    int x,  y;
-    point(int x, int y) : x(x), y(y) {}
+    ll x,  y;
+    point(ll x, ll y) : x(x), y(y) {}
     point operator -(point other)
     {
         return point(x-other.x, y-other.y);
@@ -11,17 +11,17 @@ struct point
         return x!=other.x ? x<other.x : y<other.y;
     }
 };
-int cross(point a, point b)
+ll cross(point a, point b)
 {
     return a.x*b.y-a.y*b.x;
 }
 struct sortCCW
 {
     point center ;
-    sortCW(point center) : center(center) {}
+    sortCCW(point center) : center(center) {}
     bool operator () (point  a,point  b)
     {
-        int res=cross(a-center, b-center);
+        ll res=cross(a-center, b-center);
         if(res)
             return res>0;
         return a.y!=b.y ? a.y>b.y : a.x < b.x;
