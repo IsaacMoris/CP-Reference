@@ -4,29 +4,27 @@
 #define ld  long double
 #define IO ios_base::sync_with_stdio(0); cin.tie(0); cout.tie(0);
 using namespace std;
-typedef long long int64;
-typedef long double float128;
-
-const int64 is_query = -(1LL<<62), inf = 1e18;
-
 struct Line
 {
-    int64 m, b;
+    ll m, b;
     mutable function<const Line*()> succ;
-    bool operator<(const Line& rhs) const
+    bool operator<(const Line& other) const
     {
-        if (rhs.b != is_query)
-            return m < rhs.m;
+        return m < other.m;
+    }
+    bool operator<(const ll &x) const
+    {
         const Line* s = succ();
         if (!s)
             return 0;
-        int64 x = rhs.m;
         return b - s->b < (s->m - m) * x;
     }
 };
-
-struct HullDynamic : public multiset<Line>   // will maintain upper hull for maximum
+// will maintain upper hull for maximum
+struct HullDynamic : public multiset<Line, less<>>    
 {
+    bool IsMIN=false;
+    HullDynamic(bool IsMIN) : IsMIN(IsMIN) {}
     bool bad(iterator y)
     {
         auto z = next(y);
@@ -39,9 +37,9 @@ struct HullDynamic : public multiset<Line>   // will maintain upper hull for max
         auto x = prev(y);
         if (z == end())
             return y->m == x->m && y->b <= x->b;
-        return (float128)(x->b - y->b)*(z->m - y->m) >= (float128)(y->b - z->b)*(y->m - x->m);
+        return (ld)(x->b - y->b)*(z->m - y->m) >= (ld)(y->b - z->b)*(y->m - x->m);
     }
-    void insert_line(int64 m, int64 b)
+    void insert_line(ll m, ll b)
     {
         auto y = insert({ m, b });
         y->succ = [=] { return next(y) == end() ? 0 : &*next(y); };
@@ -56,18 +54,15 @@ struct HullDynamic : public multiset<Line>   // will maintain upper hull for max
             erase(prev(y));
     }
 
-    int64 eval(int64 x)
+    ll query(ll x)
     {
-        auto l = *lower_bound((Line)
-        {
-            x, is_query
-        });
+
+        auto l = *lower_bound(x);
         return l.m * x + l.b;
     }
 };
 int main()
 {
     IO
-    HullDynamic hd ;
 
 }
