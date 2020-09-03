@@ -21,10 +21,8 @@ struct Line
     }
 };
 // will maintain upper hull for maximum
-struct HullDynamic : public multiset<Line, less<>>    
+struct HullDynamic : public multiset<Line, less<>>
 {
-    bool IsMIN=false;
-    HullDynamic(bool IsMIN) : IsMIN(IsMIN) {}
     bool bad(iterator y)
     {
         auto z = next(y);
