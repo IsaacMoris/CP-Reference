@@ -4,8 +4,6 @@
 #define ld  long double
 #define IO ios_base::sync_with_stdio(0); cin.tie(0); cout.tie(0);
 using namespace std;
-int n ;
-string s ;
 void count_sort(vector<int> &p, vector<int> &c)
 {
     int n=p.size();
@@ -28,12 +26,10 @@ void count_sort(vector<int> &p, vector<int> &c)
     p=new_p;
 
 }
-int main()
+vector<int> Suffix_Array(string &s)
 {
-    IO
-    cin>>s;
     s+='$';
-    n=s.size();
+    int n=s.size();
     vector<int> p(n), c(n);
     {
         // k=0
@@ -67,6 +63,14 @@ int main()
         c=new_c;
         k++;
     }
-    for(auto i : p)
+    s.pop_back();
+    return p;
+}
+int main()
+{
+    IO
+    string s;
+    cin>>s;
+    for(auto i : Suffix_Array(s))
         cout<<i<<" ";
 }
