@@ -15,16 +15,16 @@ ll cross(point a, point b)
 {
     return a.x*b.y-a.y*b.x;
 }
-struct sortCCW
-{
-    point center ;
+struct sortCCW {
+    point center;
+ 
     sortCCW(point center) : center(center) {}
-    bool operator () (point  a,point  b)
-    {
-        ll res=cross(a-center, b-center);
-        if(res)
-            return res>0;
-        return a.y!=b.y ? a.y>b.y : a.x < b.x;
+ 
+    bool operator()(point a, point b) {
+        ll res = cross(a - center, b - center);
+        if (abs(res)>eps)
+            return res > 0;
+        return a.y != b.y ? a.y-center.y <0 ? a.y >  b.y : a.y<b.y : a.x < b.x;
     }
 };
 vector<point> hull(vector<point> v)
