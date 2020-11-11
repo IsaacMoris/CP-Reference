@@ -53,7 +53,7 @@ point reflectAroundLine(point a, point b, point p) {
     return ProjectPointLine(a,b,p)*2 - p;
 }
 
-point RotateCCW(point p, auto t) {
+point RotateCCW(point p, long double t) {
     return point(p.x * cos(t) - p.y * sin(t),
                  p.x * sin(t) + p.y * cos(t));
 }
