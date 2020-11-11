@@ -5,7 +5,7 @@
 #define IO ios_base::sync_with_stdio(0); cin.tie(0); cout.tie(0);
 using namespace std;
 struct point {
-    using  type =  long long;
+    using  type =  long long edit this first ;
     type x,  y;
     point(type x, type y) : x(x), y(y) {}
 
@@ -51,6 +51,11 @@ point ProjectPointSegment(point a, point b, point c) {
 point reflectAroundLine(point a, point b, point p) {
     //(proj-p) *2 + p
     return ProjectPointLine(a,b,p)*2 - p;
+}
+
+point RotateCCW(point p, auto t) {
+    return point(p.x * cos(t) - p.y * sin(t),
+                 p.x * sin(t) + p.y * cos(t));
 }
 
 int main() {
