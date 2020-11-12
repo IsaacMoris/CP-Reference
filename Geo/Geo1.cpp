@@ -20,6 +20,9 @@ struct point {
     point operator /(ptype c) const {
         return point(x / c, y / c);
     }
+    point prep() {
+        return point(-y, x);
+    }
 
 };
 ptype cross(point a, point b) {
@@ -95,6 +98,11 @@ vector<point> CircleCircleIntersect(point c1, double r1, point c2, double r2) {
 
     return {RotateCCW(p, angle), RotateCCW(p, -angle)};
 
+}
+point circumcircle(point p1, point p2, point p3) {
+
+    return LineLineIntersect((p1 + p2) / 2, (p1 - p2).prep(),
+                             (p1 + p3) / 2, (p1 - p3).prep() );
 }
 //S : Area.
 //I : number points with integer coordinates lying strictly inside the polygon.
