@@ -102,6 +102,10 @@ vector<point> CircleCircleIntersect(point c1, double r1, point c2, double r2) {
     return {RotateCCW(p, angle), RotateCCW(p, -angle)};
 
 }
+//S : Area.
+//I : number points with integer coordinates lying strictly inside the polygon.
+//B : number of points lying on polygon sides by B.
+//S = I + B/2 −1
 int main() {
     IO
    
