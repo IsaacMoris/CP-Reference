@@ -1,0 +1,12 @@
+void FA()
+{
+	for(int i = 1, k = 0; i < m; i++)
+	{
+		while(k > 0 && pat[k] != pat[i])
+			k = fail[k - 1];
+		if(pat[k] == pat[i])
+			fail[i] = ++k;
+		else
+			fail[i] = k;
+	}
+}

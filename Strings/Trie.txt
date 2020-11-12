@@ -1,0 +1,15 @@
+int trie[501][11], trie_ind = 0;
+int lvl[501], freq[501];
+void insert(string s, int m){
+  int node = 0;
+  for(int i = 0; i < s.size(); i++){
+    if(!trie[node][s[i] - '0'])
+      trie[node][s[i] - '0'] = ++trie_ind;
+ 
+    int nxt = trie[node][s[i] - '0'];
+    lvl[nxt] = lvl[node] + 1;
+    node = nxt;
+  }
+ 
+  freq[node] += m;
+}

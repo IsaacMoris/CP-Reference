@@ -1,0 +1,15 @@
+void kmp()
+{
+	for(int i = 0, k = 0; i < n; i++)
+	{
+		while(k > 0 && pat[k] != s[i])
+			k = fail[k - 1];
+		if(pat[k] == s[i])
+			k++;
+		if(k == m)
+		{
+		    cout<<"there is occurrence"
+			k = fail[k - 1];
+		}
+	}
+}
