@@ -4,7 +4,7 @@
 #define ld  long double
 #define IO ios_base::sync_with_stdio(0); cin.tie(0); cout.tie(0);
 using namespace std;
-using  ptype =  long long ;
+using  ptype =  double edit this first ;
 struct point {
 
     ptype x,  y;
@@ -69,6 +69,19 @@ point RotateCCW(point p, double t) {
                  p.x * sin(t) + p.y * cos(t));
 }
 
+vector<point> CircleLineIntersect(point a, point b, point center, double r) {
+    a = a - center;
+    b = b - center;
+    point p = ProjectPointLine(a, b, point(0, 0)); // project point from center to the Line
+    if(dot(p, p) > r * r)
+        return {};
+    double len = sqrt(r * r - dot(p, p));
+    if(len < 1e-9)
+        return {center + p};
+
+    point d = (a - b) / abs(a - b);
+    return {center + p + d * len, center + p - d * len};
+}
 int main() {
     IO
 
