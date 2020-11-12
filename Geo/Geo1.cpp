@@ -1,9 +1,3 @@
-#include<iostream>
-#include <bits/stdc++.h>
-//#define ll long long
-#define ld  long double
-#define IO ios_base::sync_with_stdio(0); cin.tie(0); cout.tie(0);
-using namespace std;
 using  ptype =  double edit this first ;
 double EPS = 1e-9;
 struct point {
@@ -106,7 +100,3 @@ vector<point> CircleCircleIntersect(point c1, double r1, point c2, double r2) {
 //I : number points with integer coordinates lying strictly inside the polygon.
 //B : number of points lying on polygon sides by B.
 //S = I + B/2 −1
-int main() {
-    IO
-   
-}
