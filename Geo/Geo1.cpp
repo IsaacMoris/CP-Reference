@@ -44,10 +44,13 @@ double angle (point a, point b) {
 point LineLineIntersect(point a1, point d1, point a2, point d2) {
     return a1 + d1 * cross(a2 - a1, d2) / cross(d1, d2);
 }
+// Line a---b
+// point C
 point ProjectPointLine(point a, point b, point c) {
     return a + (b - a) * 1.0 * dot(c - a, b - a) / dot(b - a, b - a);
 }
-
+// segment a---b
+// point C
 point ProjectPointSegment(point a, point b, point c) {
     double r = dot(c - a, b - a) / dot(b - a, b - a);
     if(r < 0)
@@ -56,17 +59,18 @@ point ProjectPointSegment(point a, point b, point c) {
         return b;
     return a + (b - a) * r ;
 }
-
+// Line a---b
+// point p
 point reflectAroundLine(point a, point b, point p) {
     //(proj-p) *2 + p
     return ProjectPointLine(a, b, p) * 2 - p;
 }
-
+// Around origin 
 point RotateCCW(point p, double t) {
     return point(p.x * cos(t) - p.y * sin(t),
                  p.x * sin(t) + p.y * cos(t));
 }
-
+// Line a---b
 vector<point> CircleLineIntersect(point a, point b, point center, double r) {
     a = a - center;
     b = b - center;
