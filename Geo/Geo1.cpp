@@ -40,7 +40,7 @@ double angle (point a, point b) {
     return acos(dot(a, b) / abs(a) / abs(b));
 }
 // a : point in Line
-// d : Line slope
+// d : Line direction
 point LineLineIntersect(point a1, point d1, point a2, point d2) {
     return a1 + d1 * cross(a2 - a1, d2) / cross(d1, d2);
 }
