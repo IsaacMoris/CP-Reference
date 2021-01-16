@@ -1,0 +1,13 @@
+Number Theory + Algebra
+________________________
+1-GCD
+2-Extended GCD
+3-Diophantine Equations
+4-Chinese Remainder Theorem
+5-Mobius Function
+6-Euler Totient Function
+7-Modular Inverse
+8-Sieve of Eratosthenes
+9-Primality tests
+10-Discrete Log
+11-Fast Fourier transform
