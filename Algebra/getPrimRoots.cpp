@@ -1,50 +1,30 @@
-#include<bits/stdc++.h>
-#define ll long long
-#define IL inline
-#define RG register
-using namespace std;
-
-ll prm[1000], tot, N, root;
-
-ll Power(ll bs, ll js, ll MOD) {
-    ll S = 1, T = bs;
-    while(js) {
-        if(js & 1)
-            S = S * T % MOD;
-        T = T * T % MOD;
-        js >>= 1;
-    }
-    return S;
+int powmod (int a, int b, int p) {
+    int res = 1;
+    while (b)
+        if (b & 1)
+            res = int (res * 1ll * a % p),  --b;
+        else
+            a = int (a * 1ll * a % p),  b >>= 1;
+    return res;
 }
 
-IL ll GetRoot(RG ll n) {
-    RG ll tmp = n - 1, tot = 0;
-    for(RG ll i = 2; i <= sqrt(tmp); i ++) {
-        if(tmp % i == 0) {
-            prm[++tot] = i;
-            while(tmp % i == 0)
-                tmp /= i;
+int generator (int p) {
+    vector<int> fact;
+    int phi = p - 1,  n = phi;
+    for (int i = 2; i * i <= n; ++i)
+        if (n % i == 0) {
+            fact.push_back (i);
+            while (n % i == 0)
+                n /= i;
         }
-    }
-    if (tmp != 1)
-        prm [++ tot] = tmp; // prime factorization of
-    for(RG ll g = 2; g <= n - 1; g ++) {
-        bool flag = 1;
-        for (RG int i = 1; i <= tot; i ++) {// detect whether the conditions
-            if(Power(g, (n - 1) / prm[i], n) == 1) {
-                flag = 0;
-                break;
-            }
-        }
-        if(flag)
-            return g;
-    }
-    return 0; // no solution
-}
+    if (n > 1)
+        fact.push_back (n);
 
-int main() {
-    cin >> N;
-    root = GetRoot(N);
-    cout << root << endl;
-    return 0;
+    for (int res = 2; res <= p; ++res) {
+        bool ok = true;
+        for (size_t i = 0; i < fact.size() && ok; ++i)
+            ok &= powmod (res, phi / fact[i], p) != 1;
+        if (ok)  return res;
+    }
+    return -1;
 }
