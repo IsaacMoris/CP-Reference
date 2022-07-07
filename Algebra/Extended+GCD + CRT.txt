@@ -35,7 +35,8 @@ pair<ll, ll> CRT(vector<ll> r, vector<ll> m) {
         ll g = de(m1, -m2, r2 - r1, x0, y0);
 
         if(g == -1) return {-1, -1} ;
-
+        
+        x0 %= m2;
         ll nr = x0 * m1 + r1;
         ll nm = m1 / g * m2;
 
