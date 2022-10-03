@@ -84,25 +84,26 @@ vector<point> CircleLineIntersect(point a, point b, point center, double r) {
     point d = (a - b) / abs(a - b);
     return {center + p + d * len, center + p - d * len};
 }
-vector<point> CircleCircleIntersect(point c1, double r1, point c2, double r2) {
 
-    if(r1 < r2) {
+vector<point> CircleCircleIntersect(point c1, ld r1, point c2, ld r2) {
+
+    if (r1 < r2) {
         swap(r1, r2);
         swap(c1, c2);
     }
-    double d = abs(c1 - c2); // distance between c1,c2
-    if(d > r1 + r2 || d < r1 - r2)
+    ld d = abs(c2 - c1); // distance between c1,c2
+    if (d > r1 + r2 || d < r1 - r2 || d < 1e-9)  // zero or infinite solutions
         return {};
-
-    double angle = acos(min((d * d + r1 * r1 - r2 * r2) / (2 * r1 * d), 1.0));
+    ld angle = acos(min((d * d + r1 * r1 - r2 * r2) / (2 * r1 * d), (ld) 1.0));
     point p = (c2 - c1) / d * r1;
 
-    if(angle < EPS)
+    if (angle < 1e-9)
         return {p};
 
-    return {RotateCCW(p, angle), RotateCCW(p, -angle)};
+    return {c1 + RotateCCW(p, angle), c1 + RotateCCW(p, -angle)};
 
 }
+
 point circumcircle(point p1, point p2, point p3) {
 
     return LineLineIntersect((p1 + p2) / 2, (p1 - p2).prep(),
