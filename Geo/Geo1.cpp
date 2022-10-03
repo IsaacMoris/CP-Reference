@@ -98,7 +98,7 @@ vector<point> CircleCircleIntersect(point c1, ld r1, point c2, ld r2) {
     point p = (c2 - c1) / d * r1;
 
     if (angle < EPS)
-        return {p};
+        return {c1 + p};
 
     return {c1 + RotateCCW(p, angle), c1 + RotateCCW(p, -angle)};
 
