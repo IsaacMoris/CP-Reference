@@ -92,12 +92,12 @@ vector<point> CircleCircleIntersect(point c1, ld r1, point c2, ld r2) {
         swap(c1, c2);
     }
     ld d = abs(c2 - c1); // distance between c1,c2
-    if (d > r1 + r2 || d < r1 - r2 || d < 1e-9)  // zero or infinite solutions
+    if (d > r1 + r2 || d < r1 - r2 || d < EPS)  // zero or infinite solutions
         return {};
     ld angle = acos(min((d * d + r1 * r1 - r2 * r2) / (2 * r1 * d), (ld) 1.0));
     point p = (c2 - c1) / d * r1;
 
-    if (angle < 1e-9)
+    if (angle < EPS)
         return {p};
 
     return {c1 + RotateCCW(p, angle), c1 + RotateCCW(p, -angle)};
